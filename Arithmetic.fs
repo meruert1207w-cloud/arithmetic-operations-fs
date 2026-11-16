@@ -37,11 +37,10 @@ type Functions =
             | Error message, _ -> Error message
             | _, Error message -> Error message
 
-    static member add : obj array -> Result<float, string> = function
-        | values ->
-            match Functions.parseOperands ("Қосу", values) with
-            | Error message -> Error message
-            | Ok(first, second) -> Ok(first + second)
+    static member add (a: obj, b: obj) : Result<float, string> =
+        match Functions.parseOperands ("Қосу", [| a; b |]) with
+        | Error message -> Error message
+        | Ok(first, second) -> Ok(first + second)
 
     static member subtract : obj array -> Result<float, string> = function
         | values ->
