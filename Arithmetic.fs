@@ -34,24 +34,28 @@ let private parseOperands (operationName: string) (values: obj array) : Result<f
         | Error message, _ -> Error message
         | _, Error message -> Error message
 
-let add (values: obj array) : Result<float, string> =
-    match parseOperands "Қосу" values with
-    | Error message -> Error message
-    | Ok(first, second) -> Ok(first + second)
+let add : obj array -> Result<float, string> = function
+    | values ->
+        match parseOperands "Қосу" values with
+        | Error message -> Error message
+        | Ok(first, second) -> Ok(first + second)
 
-let subtract (values: obj array) : Result<float, string> =
-    match parseOperands "Азайту" values with
-    | Error message -> Error message
-    | Ok(first, second) when first < second -> Error "Азайту: нәтиже теріс болмауы керек."
-    | Ok(first, second) -> Ok(first - second)
+let subtract : obj array -> Result<float, string> = function
+    | values ->
+        match parseOperands "Азайту" values with
+        | Error message -> Error message
+        | Ok(first, second) when first < second -> Error "Азайту: нәтиже теріс болмауы керек."
+        | Ok(first, second) -> Ok(first - second)
 
-let multiply (values: obj array) : Result<float, string> =
-    match parseOperands "Көбейту" values with
-    | Error message -> Error message
-    | Ok(first, second) -> Ok(first * second)
+let multiply : obj array -> Result<float, string> = function
+    | values ->
+        match parseOperands "Көбейту" values with
+        | Error message -> Error message
+        | Ok(first, second) -> Ok(first * second)
 
-let divide (values: obj array) : Result<float, string> =
-    match parseOperands "Бөлу" values with
-    | Error message -> Error message
-    | Ok(_, 0.0) -> Error "Бөлу: нөлге бөлуге болмайды."
-    | Ok(first, second) -> Ok(first / second)
+let divide : obj array -> Result<float, string> = function
+    | values ->
+        match parseOperands "Бөлу" values with
+        | Error message -> Error message
+        | Ok(_, 0.0) -> Error "Бөлу: нөлге бөлуге болмайды."
+        | Ok(first, second) -> Ok(first / second)
